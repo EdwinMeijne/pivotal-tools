@@ -1,0 +1,50 @@
+// import React from 'react';
+//
+// function MultiMembersToProjects(props) {
+//
+//   let emails = React.createRef();
+//
+//   return (
+//     <form onSubmit={handleSubmit}>
+//
+//       <label>
+//         <h3>Email addresses:</h3>
+//         <textarea id="emails" placeholder="Email addresses, comma separated." ref={emails}/>
+//       </label>
+//       <div>
+//         <input type="submit" value="Submit"/>
+//       </div>
+//     </form>
+//   );
+//
+//
+//     emailList.forEach(({emailAddress, projectId}, index) => {
+//       setTimeout(() => {
+//         console.log('Sending invite to ' + emailAddress + ' for project id ' + projectId);
+//
+//         addEmailToProjectId(emailAddress, projectId, 'member', xtoken.current.value)
+//           .then(result => {
+//             console.log('Result for invite to ' + emailAddress + ' for project id ' + projectId, result);
+//           });
+//       }, index * 1000);
+//     });
+//
+//     // https://www.pivotaltracker.com/services/v5/projects/2240560/memberships
+//
+//     // https://www.pivotaltracker.com/accounts/639516/memberships/create_project_memberships
+//   }
+// }
+//
+// function addEmailToProjectId(email, projectId, role, xtoken) {
+//   return fetch(`https://www.pivotaltracker.com/services/v5/projects/${projectId}/memberships`, {
+//     method: 'POST',
+//     headers: {
+//       "Content-Type": "Application/json",
+//       "X-TrackerToken": xtoken,
+//     },
+//     body: JSON.stringify({email, role}),
+//   })
+//     .then(response => response.json());
+// }
+//
+// export default MultiMembersToProjects;
