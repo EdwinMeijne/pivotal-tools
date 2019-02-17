@@ -1,24 +1,25 @@
 import React, {useState} from "react";
-import {LoginComponent} from "../components/LoginComponent";
+import {Login} from "../components/Login";
 
-interface PivotalAccount {
-    id: number,
-    name: string,
+export interface PivotalAccount {
+    id: number;
+    name: string;
 }
 
-interface PivotalProject {
-    project_id: number,
-    project_name: string,
-    project_color: string,
-    favorite: true,
-    role: string,
+export interface PivotalProject {
+    project_id: number;
+    project_name: string;
+    project_color: string;
+    favorite: true;
+    role: string;
 }
 
 export interface PivotalUser {
-    name: string,
-    accounts: PivotalAccount[],
-    projects: PivotalProject[],
-    email: string,
+    api_token: string;
+    name: string;
+    accounts: PivotalAccount[];
+    projects: PivotalProject[];
+    email: string;
 }
 
 export async function submitToken(xtoken: string) {

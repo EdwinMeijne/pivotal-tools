@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function LoginComponent({submitToken}: { submitToken: (token: string) => void }) {
+export function Login({submitToken, hint}: { submitToken: (token: string) => void, hint: string}) {
     let tokenRef = React.createRef<HTMLInputElement>();
 
     function submitForm(event: React.FormEvent<HTMLFormElement>) {
@@ -26,6 +26,7 @@ export function LoginComponent({submitToken}: { submitToken: (token: string) => 
                         <button type="submit">SUBMIT</button>
                     </label>
                 </form>
+                <p>{hint ? <p>{hint}</p> : ''}</p>
             </main>
         </div>
     );
