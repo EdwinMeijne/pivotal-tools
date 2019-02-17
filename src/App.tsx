@@ -1,46 +1,32 @@
 import React, {useState} from 'react';
 import './App.css';
-import PivotalTokenInput, {PivotalState} from "./PivotalTokenInput";
-
-interface PivotalAccount {
-    id: number,
-    name: string,
-}
-
-interface PivotalProject {
-    project_id: number,
-    project_name: string,
-    project_color: string,
-    favorite: true,
-    role: string,
-}
-
-interface PivotalUser {
-    name: string,
-    accounts: PivotalAccount[],
-    projects: PivotalProject[],
-    email: string,
-}
-
-const initialState: {
-    xtoken?: string,
-    user?: PivotalUser
-} = {};
+import {PivotalUser, submitToken} from "./services/pivotal";
+import {LoginComponent} from "./components/LoginComponent";
+import useLocalStorage from "./services/localstorage";
 
 export function App() {
-    const [pivotalState, setPivotalData] = useState(initialState);
+    const [xToken, setXtoken] = useLocalStorage('xToken', '');
+    const [pivotalState, setPivotalState] = useLocalStorage('pivotalState', {} as PivotalUser);
+    const [hint, setHint] = useState('');
 
-    if (!pivotalState.xtoken) {
-        return (
-            <main>
-                <h1>Login</h1>
-                <PivotalTokenInput setPivotalData={setPivotalData}/>
-            </main>
-        );
+    async function submitTokenHandler(xtoken: string) {
+        const user = await submitToken(xtoken);
+        if (user.error) {
+            setHint(user.error);
+        } else {
+            setXtoken(xtoken);
+            setPivotalState(user);
+        }
+    }
+
+    if (!xToken) {
+        return <LoginComponent submitToken={submitTokenHandler}/>;
     } else {
         return (
             <main>
-                <h1>Welcome, {pivotalState.user.name}</h1>
+                <ul>
+                    <li></li>
+                </ul>
             </main>
         );
     }
