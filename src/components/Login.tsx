@@ -11,7 +11,7 @@ export function Login({submitToken, hint}: { submitToken: (token: string) => voi
     }
 
     return (
-        <div>
+        <section>
             <header>
                 <h1>Login to PivotalTracker</h1>
                 <p>Retrieve your pivotal API token from your profile page, and use it to login to Pivotal Tools.</p>
@@ -20,7 +20,7 @@ export function Login({submitToken, hint}: { submitToken: (token: string) => voi
                 <form onSubmit={submitForm}>
                     <label>
                         API Token
-                        <input type="text" name="xToken" placeholder="API Token" ref={tokenRef} />
+                        <input type="text" name="xToken" placeholder="API Token" ref={tokenRef} defaultValue="" />
                     </label>
                     <label>
                         <button type="submit">SUBMIT</button>
@@ -28,6 +28,6 @@ export function Login({submitToken, hint}: { submitToken: (token: string) => voi
                 </form>
                 <p>{hint ? <p>{hint}</p> : ''}</p>
             </main>
-        </div>
+        </section>
     );
 }

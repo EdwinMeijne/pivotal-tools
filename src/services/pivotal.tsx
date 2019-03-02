@@ -12,9 +12,11 @@ export interface PivotalProject {
     project_color: string;
     favorite: true;
     role: string;
+    selected: boolean;
 }
 
 export interface PivotalUser {
+    error? : string;
     api_token: string;
     name: string;
     accounts: PivotalAccount[];
