@@ -25,7 +25,7 @@ export function EmailInput({setEmails}: {setEmails: (emails: string[]) => void})
                 <label>
                 </label>
                     <div>
-                        <button type="submit">SUBMIT</button>
+                        <button type="submit">Save emails!</button>
                     </div>
                 </label>
             </form>

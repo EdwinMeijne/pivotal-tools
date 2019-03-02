@@ -4,12 +4,14 @@ import {PivotalProject, PivotalUser, submitToken} from "./services/pivotal";
 import {Login} from "./components/Login";
 import {ProjectSelector} from "./components/ProjectSelector";
 import {EmailInput} from './components/EmailInput';
+import {AddEmailToProject} from "./components/AddEmailToProject";
 
 export function App() {
     const [pivotalState, setPivotalState] = useState({} as PivotalUser);
     const [emailState, setEmailState] = useState([] as string[]);
     const [hint, setHint] = useState('');
 
+    // TODO maybe move this logic down again? Whats the best setup here
     async function submitTokenHandler(xtoken: string) {
         const user = await submitToken(xtoken);
         console.info('user:', user);
@@ -27,6 +29,10 @@ export function App() {
             <main>
                 <ProjectSelector pivotalProjects={pivotalState.projects} selectProject={selectProject}/>
                 <EmailInput setEmails={setEmails}></EmailInput>
+                <AddEmailToProject
+                    emails={emailState}
+                    projects={pivotalState.projects.filter(p => p.selected)}
+                ></AddEmailToProject>
             </main>
         );
     }
