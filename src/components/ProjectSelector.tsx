@@ -2,8 +2,8 @@ import React from 'react';
 import {PivotalProject} from "../services/pivotal";
 
 export function ProjectSelector({ pivotalProjects, selectProject }: {
-    pivotalProjects: {[key: number]: PivotalProject},
-    selectProject: (project: PivotalProject) => void
+    pivotalProjects: PivotalProject[],
+    selectProject: (project: PivotalProject) => void,
 }) {
 
     return (

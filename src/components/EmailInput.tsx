@@ -1,11 +1,11 @@
 import React from 'react';
 
-export function EmailInput({setEmails}: {setEmails: (emails: string[]) => void}) {
+export function EmailInput({addEmails}: {addEmails: (emails: string[]) => void}) {
     let emailRef = React.createRef<HTMLTextAreaElement>();
 
     function submitForm(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        setEmails(emailRef.current
+        addEmails(emailRef.current
             ? emailRef.current.value
                 .split('\n')
                 .map((mail: string) => mail.trim())
@@ -25,7 +25,7 @@ export function EmailInput({setEmails}: {setEmails: (emails: string[]) => void})
                 <label>
                 </label>
                     <div>
-                        <button type="submit">Save emails!</button>
+                        <button type="submit">Add to projects!</button>
                     </div>
                 </label>
             </form>
