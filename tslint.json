@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-react-hooks"
+  ],
+  "rules": {
+    "jsx-wrap-multiline": false
+  }
+}

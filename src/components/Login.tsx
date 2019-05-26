@@ -1,33 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {fetchUserData, PivotalUser} from "../services/pivotal";
 
-export function Login({submitToken, hint}: { submitToken: (token: string) => void, hint: string}) {
+export function Login({loginSuccessHandler}: { loginSuccessHandler: (user: PivotalUser) => void }) {
+    const [hint, setHint] = useState('');
+
     let tokenRef = React.createRef<HTMLInputElement>();
 
-    function submitForm(event: React.FormEvent<HTMLFormElement>) {
+    async function submitForm(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if(tokenRef.current && tokenRef.current.value) {
-            submitToken(tokenRef.current.value);
+        if (tokenRef.current && tokenRef.current.value) {
+            const user = await fetchUserData(tokenRef.current.value);
+
+            if (user.error) {
+                console.log('error', user.error);
+                setHint(user.error);
+            } else {
+                loginSuccessHandler(user);
+            }
         }
     }
 
     return (
         <section>
-            <header>
-                <h1>Login to PivotalTracker</h1>
-                <p>Retrieve your pivotal API token from your profile page, and use it to login to Pivotal Tools.</p>
-            </header>
-            <main>
-                <form onSubmit={submitForm}>
-                    <label>
-                        API Token
-                        <input type="text" name="xToken" placeholder="API Token" ref={tokenRef} defaultValue="" />
-                    </label>
-                    <label>
-                        <button type="submit">SUBMIT</button>
-                    </label>
-                </form>
-                <p>{hint ? <p>{hint}</p> : ''}</p>
-            </main>
+            <form onSubmit={submitForm}>
+                <label>
+                    API Token
+                    <input type="text" name="xToken" placeholder="API Token" ref={tokenRef} defaultValue=""/>
+                </label>
+                <label>
+                    <button type="submit">SUBMIT</button>
+                </label>
+            </form>
+            {hint ? <p>{hint}</p> : ''}
         </section>
     );
 }

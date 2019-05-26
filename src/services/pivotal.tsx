@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {Login} from "../components/Login";
 
 export interface PivotalAccount {
     id: number;
@@ -19,10 +18,10 @@ export interface PivotalProject {
 }
 
 export enum QResult {
-    unstarted,
-    pending,
-    done,
-    error,
+    unstarted = "unstarted",
+    pending = "pending",
+    done = "done",
+    error = "error",
 }
 
 export interface MemberAddCall {
@@ -39,7 +38,7 @@ export interface PivotalUser {
     email: string;
 }
 
-export async function submitToken(xtoken: string) {
+export async function fetchUserData(xtoken: string): Promise<any> {
     try {
         const response = await fetch(`https://www.pivotaltracker.com/services/v5/me`, {
             method: 'GET',
@@ -53,19 +52,3 @@ export async function submitToken(xtoken: string) {
         return { error: 'Something went wrong' };
     }
 }
-
-export async function addEmailToProjectId(email: string, projectId: number, xtoken: string, role = 'member'): Promise<any> {
-    return fetch(`https://www.pivotaltracker.com/services/v5/projects/${projectId}/memberships`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "Application/json",
-            "X-TrackerToken": xtoken,
-        },
-        body: JSON.stringify({email, role}),
-    })
-        .then(response => response.json());
-}
-
-    // https://www.pivotaltracker.com/services/v5/projects/2240560/memberships
-
-    // https://www.pivotaltracker.com/accounts/639516/memberships/create_project_memberships
