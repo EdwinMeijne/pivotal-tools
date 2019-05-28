@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 export interface PivotalAccount {
     id: number;
@@ -36,6 +36,7 @@ export interface PivotalUser {
     name: string;
     accounts: PivotalAccount[];
     email: string;
+    projects: PivotalProject[];
 }
 
 export async function fetchUserData(xtoken: string): Promise<any> {
