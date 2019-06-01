@@ -33,13 +33,16 @@ export interface MemberAddCall {
 export interface PivotalUser {
     error? : string;
     api_token: string;
+    bitbucket_keypair: string;
+    bitbucket_token: string;
+    bitbucket_refresh: string;
     name: string;
     accounts: PivotalAccount[];
     email: string;
     projects: PivotalProject[];
 }
 
-export async function fetchUserData(xtoken: string): Promise<any> {
+export async function fetchUserData(xtoken: string): Promise<any | { error: string }> {
     try {
         const response = await fetch(`https://www.pivotaltracker.com/services/v5/me`, {
             method: 'GET',

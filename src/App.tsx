@@ -3,18 +3,20 @@ import './App.css';
 import {PivotalUser,} from "./services/pivotal";
 import {Login} from "./components/Login";
 import {useStateWithLocalStorage} from "./services/localstorage";
+import {Logout} from "./components/Logout";
 
 export function App() {
-    const [pivotalState, setPivotalState] = useStateWithLocalStorage<PivotalUser>('pivotalState');
+    const [userState, setUserState] = useStateWithLocalStorage<PivotalUser>('userState');
 
-    if (!pivotalState.api_token) {
-        return <Login loginSuccessHandler={setPivotalState}/>;
+    if (!userState.api_token) {
+        return <Login loginSuccessHandler={setUserState}/>;
     } else {
         return (
             <main>
+                <Logout/>
                 <ul>
                     {
-                        pivotalState.projects.map(project => {
+                        userState.projects.map(project => {
                             return <li key={project.project_id}>{project.project_name}</li>
                         })
                     }
